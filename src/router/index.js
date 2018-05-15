@@ -129,6 +129,12 @@ const router =  new Router({
                         },
                         {
                             // 找回/修改登录密码
+                            path: 'forgetpassword/:isforget',
+                            name: 'forgetpassword',
+                            component: FindPwd
+                        },
+                        {
+                            // 找回/修改交易密码
                             path: 'findpincode',
                             name: 'findpincode',
                             component: FindPinCode
@@ -164,8 +170,6 @@ const router =  new Router({
                     path:'notice',
                     name:'notice',
                     component: Notice,
-                    children: [
-                    ]
                 },
                 {
                     // 公告详情

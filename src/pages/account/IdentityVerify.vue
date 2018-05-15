@@ -11,17 +11,22 @@
                 <h5>1.个人基本资料认证</h5>
                 <el-form-item label="姓名：" class="base-info-line modification">
 
-                        <el-input :placeholder="fullName" v-model="idInfo.name" clearable style="float:left;"></el-input>
-                        <div class="findpassword_error" style="padding-left: 0;z-index:2000;position:absolute;top:0px;left:508px;" v-show="regname">
-                            <p class="findpassword_error_3" style="background-position:10px 6px;text-indent: 30px;">长度为6~14个字符</p>
-                            <p class="findpassword_error_2">支持数字,大小写字母和标点符号</p>
-                            <p class="findpassword_error_1">不允许有空格</p>
+                        <el-input :placeholder="fullName" @blur="nameBlur" @focus="nameFocus" v-model="idInfo.name" clearable style="float:left;"></el-input>
+                        <div class="findpassword_error" style="padding-left: 0;z-index:2000;position:absolute;top:20px;left:465px;" v-show="regname">
+                            <!-- <p class="findpassword_error_3" style="background-position:10px 6px;text-indent: 30px;">长度为6~14个字符</p>
+                            <p class="findpassword_error_2">支持数字,大小写字母和标点符号</p> -->
+                            <p class="findpassword_error_1">{{fullName}}</p>
                         </div>
                 </el-form-item>
 
                 <el-form-item :label="labelName"  class="base-info-line modification">
 
-                        <el-input  :placeholder="pHolder" v-model="idInfo.number" clearable></el-input>
+                        <el-input  :placeholder="pHolder" @blur="idBlur" @focus="idFocus" v-model="idInfo.number" clearable></el-input>
+                        <div class="findpassword_error" style="padding-left: 0;z-index:2000;position:absolute;top:20px;left:465px;" v-show="regId">
+                            <!-- <p class="findpassword_error_3" style="background-position:10px 6px;text-indent: 30px;">长度为6~14个字符</p>
+                            <p class="findpassword_error_2">支持数字,大小写字母和标点符号</p> -->
+                            <p class="findpassword_error_1">{{pHolder}}</p>
+                        </div>
 
                 </el-form-item>
                 <h5 style="height:100px;line-height:125px;">2.信息认证</h5>
@@ -55,6 +60,13 @@
                                 <img src="~@/assets/img/chuan.png"/> -->
                             </li>
                             <li class="prompt">*上传支持jpg/png</li>
+                            <li style="min-width:120px;height:120px;position: relative;" v-show="!idInfo.face_image  && submitClicked">
+                                <div class="findpassword_error" style="padding-left: 0;z-index:2000;position:absolute;top:38px;left:0;min-width:156px;" >
+                                    <!-- <p class="findpassword_error_3" style="background-position:10px 6px;text-indent: 30px;">长度为6~14个字符</p>
+                                    <p class="findpassword_error_2">支持数字,大小写字母和标点符号</p> -->
+                                    <p class="findpassword_error_1" style="min-width:120px;">{{positive}}</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div class="port">
@@ -84,6 +96,13 @@
                                 </el-upload>
                             </li>
                             <li class="prompt">*上传支持jpg/png</li>
+                            <li style="min-width:120px;height:120px;position: relative;" v-show="!idInfo.back_image && submitClicked">
+                                <div class="findpassword_error" style="padding-left: 0;z-index:2000;position:absolute;top:38px;left:0;min-width:156px;" >
+                                    <!-- <p class="findpassword_error_3" style="background-position:10px 6px;text-indent: 30px;">长度为6~14个字符</p>
+                                    <p class="findpassword_error_2">支持数字,大小写字母和标点符号</p> -->
+                                    <p class="findpassword_error_1" style="min-width:120px;">{{back}}</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div  class="int port">
@@ -112,12 +131,19 @@
                                 </el-upload>
                             </li>
                             <li class="prompt">*请提供一张手持证件照</li>
+                            <li style="min-width:120px;height:120px;position: relative;" v-show="!idInfo.body_image && submitClicked">
+                                <div class="findpassword_error" style="padding-left: 0;z-index:2000;position:absolute;top:38px;left:0;min-width:156px;" >
+                                    <!-- <p class="findpassword_error_3" style="background-position:10px 6px;text-indent: 30px;">长度为6~14个字符</p>
+                                    <p class="findpassword_error_2">支持数字,大小写字母和标点符号</p> -->
+                                    <p class="findpassword_error_1" style="min-width:120px;">{{hold}}</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-
-                <el-button class="submit-btn" @click="saveUserVerify">提交</el-button>
+                <div class="subBtn"><el-button class="submit-btn" @click="saveUserVerify">提交</el-button></div>
+                
             </el-form>
         </div>
         
@@ -155,7 +181,12 @@ export default {
             uploadUrl:api.uploadUrl(),
             userNationality:1,
             regname:false,
+            regId:false,
+            // posShow:false,
+            // backShow:false,
+            // holdShow:false,
             err:{},
+            submitClicked:false,
             idInfo: {
                 name: '',
                 number:'',
@@ -174,6 +205,15 @@ export default {
         },
         fullName(){
             return this.userNationality == 1?'请输入与身份证相符的姓名':'请输入与护照相符的姓名'
+        },
+        positive(){
+            return this.userNationality == 1?'未上传身份证正面照片':'未上传护照正面照片'
+        },
+        back(){
+            return this.userNationality == 1?'未上传身份证背面照片':'未上传护照背面照片'
+        },
+        hold(){
+            return this.userNationality == 1?'未上传身份证手持照片':'未上传护照手持照片'
         },
         authState(){
             return this.$store.getters.authState
@@ -202,6 +242,7 @@ export default {
             }
         },
         saveUserVerify(){
+            this.submitClicked =true
             var self = this
             self.err = Validate.idVerify(self.idInfo.name,self.idInfo.number,self.idInfo.face_image,self.idInfo.back_image,self.idInfo.body_image)
 
@@ -227,7 +268,25 @@ export default {
         },
         initUserInfo(){
             this.userNationality = this.$store.state.userInfo.nationality || 1
-        }
+        },
+        // 提示框的显示和隐藏
+        nameBlur(){
+            if(this.idInfo.name == null || this.idInfo.name.length==0){
+                this.regname = true
+            }
+        },
+        nameFocus(){
+            this.regname = false
+        },
+        idBlur(){
+            if(this.idInfo.number == null || this.idInfo.number.length==0){
+                this.regId = true
+            }
+        },
+        idFocus(){
+            this.regId = false
+        },
+
     },
     created(){
         this.initUserInfo()
@@ -274,7 +333,7 @@ export default {
     padding: 0 15px;
 }
 /* 错误提示 */
-.findpassword_error{text-align:left;color:#8faacc;font-size:12px;padding:13px 16px;padding-left:25px;box-sizing:border-box;border-radius:2px;width:230px;position:relative;min-height:50px;height:auto;margin-left:30px;background:#3a4a5e;float: left;line-height:20px;}
+.findpassword_error{text-align:left;color:#8faacc;font-size:12px;padding:13px 16px;padding-left:25px;box-sizing:border-box;border-radius:2px;min-width:120px;position:relative;min-height:30px;height:auto;margin-left:30px;background:#3a4a5e;float: left;line-height:20px;}
 .findpassword_error::after{
 	content: "";
 	width:0px;
@@ -286,11 +345,11 @@ export default {
     position:absolute;
     left:0px;
     margin-left:-12px;
-    top:10px;
+    top:17px;
 }
-.findpassword_error_1{background:#3a4a5e url('~@/assets/img/findpassword5.png') no-repeat 10px 6px;text-indent: 30px;}
-.findpassword_error_2{background:#3a4a5e url('~@/assets/img/findpassword6.png') no-repeat  10px 6px;text-indent: 30px;}
-.findpassword_error_3{background:#3a4a5e url('~@/assets/img/findpassword7.png') no-repeat  10px 20px;}
+.findpassword_error_1{text-indent: 20px;}
+// .findpassword_error_2{background:#3a4a5e url('~@/assets/img/findpassword6.png') no-repeat  10px 6px;text-indent: 30px;}
+// .findpassword_error_3{background:#3a4a5e url('~@/assets/img/findpassword7.png') no-repeat  10px 20px;}
 
 .image-preview{
         display: inline-block;

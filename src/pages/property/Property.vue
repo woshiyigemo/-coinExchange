@@ -1,7 +1,7 @@
 <template>
     <div class="real_name">
         <div class="real_left">
-            <div class="option" @click="goProperty">资产中心</div>
+            <div class="option"><router-link class="option" to="/property/coinoption">资产中心</router-link></div>
             <router-link class="option option-active" to="/property/coinoption">充币提币</router-link>
             <!-- <router-link class="option" active-class="option-active" to="/property/coinoption">冲币提币</router-link> -->
             <!-- <router-link class="option" active-class="option-active" to="/property/financialrecords">财务记录</router-link>

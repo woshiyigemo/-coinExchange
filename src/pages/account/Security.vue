@@ -25,16 +25,16 @@
         </div>
         <div class="account ">
             <h5 class="basic_title">账号安全</h5>
+            <!-- <ul class="message">
+                <li>谷歌验证:</li>
+                <li></li>
+                <li class="notset">去绑定</li>
+            </ul> -->
             <ul class="message">
-            <li>谷歌验证:</li>
-            <li></li>
-            <li class="notset">去绑定</li>
-        </ul>
-        <ul class="message">
-            <li>邮箱验证:</li>
-            <li>{{useremail}}</li>
-            <li class="capitalpwd">修改</li>
-        </ul>
+                <li>邮箱验证:</li>
+                <li>{{useremail}}</li>
+                <li class="capitalpwd">修改</li>
+            </ul>
         </div>
 
         <!-- 模态框 -->

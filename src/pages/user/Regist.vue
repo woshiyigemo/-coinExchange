@@ -16,7 +16,7 @@
         </div>
         <div class="login_div_user">
             <el-tooltip class="item" effect="red" :value="isEmailErr" manual  :content="err.errMsg||''" placement="right">
-                <el-input class="username_input" v-model="email" @focus="clearEmailToolTip" placeholder="邮箱"></el-input>
+                <el-input class="username_input" v-model="email" @focus="clearEmailToolTip" placeholder="邮箱" @blur="emailrepeat"></el-input>
             </el-tooltip>
         </div>
         <div class="login_div_password">
@@ -33,7 +33,6 @@
             <slider @slidercomplete="getSliderStatus"></slider>
         </div>
         <div class="login_btn" @click="regist">注册</div>
-        <!-- <div class="login_register_div">没有账号请<a href="javascript:void(0);">注册</a>?</div> -->
     </div>
 </template>
 
@@ -146,6 +145,20 @@ export default {
                 this.isPwd2Err = false
                 this.isPwdSameErr = false
             }
+        },
+        emailrepeat(){
+            var data = {
+                email:this.email,
+                password:this.password,
+                password_t:this.password_t,
+                nationality:this.nationality
+            }
+            api.userRegist(data)
+            .then(function(res){
+                if(res.error_code == 2007){
+                    this.$message(res.error_code)
+                }
+            }).catch(err => {})
         }
     }
 }

@@ -1133,6 +1133,23 @@ input[type="number"]{-moz-appearance:textfield;}
         background: rgba($color: #000, $alpha: 0.1)
     }
 }
+.real-verify{
+    .subBtn{
+        .el-button{
+            span{
+                display:inline-block;
+                width:310px;height: 50px;
+                line-height: 50px;
+            }
+        }
+        .el-button:hover span{
+            background: rgba($color: #fff, $alpha: 0.1)
+        }
+        .el-button:active span{
+            background: rgba($color: #000, $alpha: 0.1)
+        }
+    }
+}
 //历史委托
 
 //孙家兴以上

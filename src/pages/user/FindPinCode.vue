@@ -8,7 +8,7 @@
                     <div class="breadcrumb">
                         <!-- <a href="">首页 > </a>找回密码 -->
                         <el-breadcrumb separator-class="el-icon-arrow-right">
-                            <el-breadcrumb-item class="sjx_yangshi" :to="{ path: '/' }">首页</el-breadcrumb-item>
+                            <el-breadcrumb-item class="sjx_yangshi" :to="{ path: '/' }">个人中心</el-breadcrumb-item>
                             <el-breadcrumb-item class="sjx_yangshi2">修改交易密码</el-breadcrumb-item>
                         </el-breadcrumb>
                     </div>
@@ -84,7 +84,7 @@
                        </div>
                      </div>
                     <!--<a class="findpassword_main_div_btn" @click="sjx_ok">确定</a>-->
-                    <a class="findpassword_main_div_btn" @click="sjx_ok"><div>下一步</div></a>
+                    <a class="findpassword_main_div_btn" @click="sjx_ok"><div>确定</div></a>
                 </div>
               </div>
             </div>
@@ -206,6 +206,8 @@ export default {
                 }else{
                   this.isEmailErr = false
                   this.isVerifyCodeErr =false
+                  this.$message('密码修改成功!')
+                  this.$router.push({name:'security'}) 
                 }
             })
         }

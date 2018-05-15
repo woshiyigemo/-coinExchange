@@ -1,14 +1,15 @@
 <template>
     <div class="notice_main">
         <div class="notice_main_header">
-            <a href="javascript:void(0);">公告中心></a>
+            <router-link class="option" to="/exchange/coinexchange" style="outline:none;color:#525d6f;">币币交易</router-link>
+            <i class="el-icon-arrow-right"></i><span>公告中心</span>
         </div>
         <div v-for="(notice,index) in NoticeList" class="notice_con_div" :key='index'>
             <div class="notice_con_div_left">
                 <img :src="notice.notice_img" width="100%" height="100%"/>
             </div>
             <div class="notice_con_div_right">
-                <router-link target="_blank" class="notice_con_title" :to="{path:'/notice/detail',query:{id:notice.notice_id}}">{{notice.notice_title}}</router-link>
+                <router-link class="notice_con_title" :to="{path:'/notice/detail',query:{id:notice.notice_id}}">{{notice.notice_title}}</router-link>
                 <div class="notice_desc">{{notice.notice_desc}}</div>
                 <div class="notice_time">
                     <div class="notice_time_left">{{notice.notice_time}}</div>
@@ -50,9 +51,8 @@ export default {
 </script>
 <style>
     .notice_main{width:1200px;height:auto;min-height:200px;margin:0px auto;margin-top:40px;background:#191f27;padding:0px 50px;overflow:hidden;}
-    .notice_main_header{header:50px;width:100%;display:block;position:relative}
-    .notice_main_header:after{width:1100px;height:1px;content:' ';display:block;background:#202234;position:absolute;bottom:0;left:50px;}
-    .notice_main_header a{height:50px;line-height:50px;color:#455266;font-size:14px;display:block;}
+    .notice_main_header{line-height: 87px;border-bottom: 1px solid #202234;color: #525d6f;font-size: 12px;}
+    .notice_main_header span{color: #c8cdd3;}
     .notice_con_div{width:1200px;height:180px;display:block;padding:20px 0px;display:flex;position:relative;}
     .notice_con_div:after{width:1100px;height:1px;content:' ';display:block;background:#202234;position:absolute;bottom:0;left:50px;}
     .notice_con_div:hover{background:#1c232c;}

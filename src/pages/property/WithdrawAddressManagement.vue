@@ -2,7 +2,9 @@
     <div class="sjx_main addressmanagement">
       <div class="sjx_section">
         <div class="sjx_sec1">
-          <div class="section_title"><a href="javascript:void(0);" style="outline:none;color:#525d6f;" @click="goProperty">资产中心</a><i class="el-icon-arrow-right"></i><span>提币地址管理</span></div>
+          <div class="section_title">
+            <router-link class="option" to="/property/coinoption" style="outline:none;color:#525d6f;">资产中心</router-link>
+            <i class="el-icon-arrow-right"></i><span>提币地址管理</span></div>
           <div class="address">
             <div class="address_left">
               <p>币种</p>
@@ -120,9 +122,6 @@ export default {
   methods:{
     countDownEnd(){
       this.counting = false
-    },
-    goProperty(){
-        this.$router.push({name:'coinoption'})
     },
     // 发送验证邮件
     getTakeCoinVerifyCode(){

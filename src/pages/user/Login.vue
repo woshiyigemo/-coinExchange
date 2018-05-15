@@ -18,7 +18,9 @@
         </div>
         <div class="sliderbox">
             <slider @slidercomplete="getSliderStatus"></slider>
+            <p v-if="!sliderStatus && submitClicked" class="findpassword_error_1">请进行滑块认证</p>
         </div>
+        
         <div class="login_btn" @click="login">登录</div>
         <div class="login_register_div">没有账号请<a href="javascript:void(0);" @click="goRegist">注册</a>?</div>
     </div>
@@ -34,6 +36,7 @@ export default {
   name: 'Login',
   data () {
     return {
+      submitClicked:false,
       sliderStatus:false,
       isEmailErr:false,
       isPwdErr:false,
@@ -47,6 +50,7 @@ export default {
   },
   methods:{
     login(){
+        this.submitClicked = true;
         var self = this
         self.err = Validate.login(self.email,self.pwd,self.sliderStatus)
         if(self.err.errCode == 1001 || self.err.errCode == 2003){
@@ -56,6 +60,7 @@ export default {
             self.isPwdErr = true
             return
         }else if(self.err.errCode == 1010){
+            showCodeNotSelectedError 
             return
         }
         
@@ -98,7 +103,7 @@ export default {
         this.$router.push({name:'regist'})
     },
     forgetPwd(){
-        this.$router.push({name:'findpassword',params:{type:2}})
+        this.$router.push({name:'forgetpassword',params:{isforget:1}})
     }
   }
 }
@@ -159,5 +164,8 @@ margin-left: auto;
     top:10px;
 }
 .login_error_1{background:#fc3759 url('~@/assets/img/findpassword8.png') no-repeat  10px 20px;}
+
+//错误提示
+.findpassword_error_1{text-align:center;color: #fc3759;font-size: 12px;}
 
 </style>

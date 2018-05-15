@@ -7,8 +7,12 @@
                 <div class="findpassword_main_div_top">
                     <div class="breadcrumb">
                         <!-- <a href="">首页 > </a>找回密码 -->
-                        <el-breadcrumb separator-class="el-icon-arrow-right">
-                            <el-breadcrumb-item class="sy" :to="{ path: '/' }">首页</el-breadcrumb-item>
+                        <el-breadcrumb separator-class="el-icon-arrow-right" v-if="isforget!=1" >
+                            <el-breadcrumb-item class="sy" :to="{ path: '/account/security' }">个人中心</el-breadcrumb-item>
+                            <el-breadcrumb-item class="findp">修改登录密码</el-breadcrumb-item>
+                        </el-breadcrumb>
+                         <el-breadcrumb separator-class="el-icon-arrow-right" v-else >
+                            <el-breadcrumb-item class="sy" :to="{ path: '/user/login' }">登录页</el-breadcrumb-item>
                             <el-breadcrumb-item class="findp">找回登录密码</el-breadcrumb-item>
                         </el-breadcrumb>
                     </div>
@@ -113,6 +117,7 @@ export default {
     },
     data(){
         return{
+            isforget:0,
             counting:false,
             curStep:1,
             email:'',
@@ -129,6 +134,12 @@ export default {
         countdown
     },
     created(){
+
+        console.log('this.$route.params',this.$route.params.isforget)
+
+        this.isforget = this.$route.params.isforget
+
+        
     //    this.getImg()
     },
     mounted () {
@@ -215,7 +226,7 @@ export default {
                   this.isEmailErr = false
                   this.isVerifyCodeErr =false
                   this.$message('密码修改成功!')
-                  this.$router.push({name:'login'}) 
+                  this.$router.push({name:'security'}) 
                 } 
             })
             

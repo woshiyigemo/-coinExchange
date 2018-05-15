@@ -1,8 +1,9 @@
 <template>
     <div class="notice_main">
         <div class="notice_main_header">
-            <router-link target="_blank" class="notice_con_title" to="/notice">公告中心 &nbsp;></router-link>
-            <span> 公告详情</span>
+            <router-link class="option" to="/exchange/coinexchange" style="outline:none;color:#525d6f;">币币交易</router-link>
+            <i class="el-icon-arrow-right"></i><router-link class="option" to="/notice" style="outline:none;color:#525d6f;">公告中心</router-link>
+            <i class="el-icon-arrow-right"></i><span>公告详情</span>
         </div>
         <div class="notice_main_title">{{NoticeDetail.notice_title}}</div>
         <div class="notice_main_desc">{{NoticeDetail.notice_desc}}</div>
@@ -58,10 +59,8 @@ export default {
 </script>
 <style>
     .notice_main{width:1200px;height:auto;min-height:200px;margin:0px auto;margin-top:40px;background:#191f27;overflow:hidden;}
-    .notice_main_header{width:100%;height:50px;display:block;position:relative;padding:0px 50px;}
-    .notice_main_header:after{width:1100px;height:1px;content:' ';display:block;background:#202234;position:absolute;bottom:0;left:50px;}
-    .notice_main_header a{height:50px;line-height:50px;color:#455266;font-size:14px;display:block;float:left;width:72px;}
-    .notice_main_header span{color:white;display:block;line-height:50px;height:50px;float:left;font-size:14px;margin-left:5px;}
+    .notice_main_header{line-height: 87px;border-bottom: 1px solid #202234;color: #525d6f;font-size: 12px;}
+    .notice_main_header span{color: #c8cdd3;}
     .notice_main_title{padding:0px 50px;width:100%;margin-top:20px;height:24px;line-height:24px;font-size:20px;color:white;text-align:left;}
     .notice_main_desc{padding:0px 50px;width:100%;height:70px;margin-top:15px;line-height:22px;font-size:14px;color:#767a7f;}
     .notice_detail_time{padding:0px 50px;width:100%;height:45px;padding-top:10px;}

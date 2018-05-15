@@ -33,7 +33,7 @@
 								<div>
 									<p class="popover-titter">充币地址</p>
 								</div>
-								<button v-if="rechargeInfo.showGetAddressBtn"  @click="rechargeCoin">充币地址申请</button>
+								<button v-if="rechargeInfo.showGetAddressBtn" v-show="btnShow"  @click="rechargeCoin">充币地址申请</button>
 								<span v-if="rechargeInfo.showAddress">{{rechargeInfo.rechargeAddress}}</span>
 								<button v-if="rechargeInfo.showAddress" type="button"
 									v-clipboard:copy="rechargeInfo.rechargeAddress"
@@ -153,6 +153,7 @@
 		name: 'CoinOption',
 		data() {
 			return {
+				btnShow:true,
 				counting:false,
 				balance: 0,
 				verifyInfo:{
@@ -287,6 +288,7 @@
 						this.rechargeInfo.rechargeAddress = res.user_address
 						this.rechargeInfo.showAddress = true
 						console.log(this.assetsList)
+						this.btnShow = false
 					}
 				}).catch(err => {console.log(7777777)})
 			},
